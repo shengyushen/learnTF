@@ -9,7 +9,6 @@ exe = $(src:.cu=.exe)
 
 
 all: $(exe)
-	echo $(exe)
 
 %.exe : %.cu
 	$(CC) $(FLAG) -o $@ $<

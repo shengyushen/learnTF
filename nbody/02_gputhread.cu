@@ -202,6 +202,11 @@ int main(const int argc, const char** argv) {
    * interaction amongst bodies, and adjusting their positions to reflect.
    */
 
+	 cudaMemPrefetchAsync(p,bytes,deviceId);
+	 cudaMemPrefetchAsync(px,bytes,deviceId);
+	 cudaMemPrefetchAsync(py,bytes,deviceId);
+	 cudaMemPrefetchAsync(pz,bytes,deviceId);
+
   /*******************************************************************/
   // Do not modify these 2 lines of code.
   for (int iter = 0; iter < nIters; iter++) {
@@ -234,6 +239,10 @@ int main(const int argc, const char** argv) {
   }
   double avgTime = totalTime / (double)(nIters);
   float billionsOfOpsPerSecond = 1e-9 * nBodies * nBodies / avgTime;
+	 cudaMemPrefetchAsync(p,bytes,cudaCpuDeviceId);
+	 cudaMemPrefetchAsync(px,bytes,cudaCpuDeviceId);
+	 cudaMemPrefetchAsync(py,bytes,cudaCpuDeviceId);
+	 cudaMemPrefetchAsync(pz,bytes,cudaCpuDeviceId);
 	cudaDeviceSynchronize();
 
 #ifdef ASSESS
